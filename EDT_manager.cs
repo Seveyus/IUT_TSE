@@ -82,9 +82,6 @@ namespace EDT_TSE_2.Class
              txt_2 = Text_to_string(contenuICS2);
 
 
-
-
-
             ICS_Dividing_Into_Event(txt_);
             ICS_Dividing_Into_Event(txt_2);
 
@@ -102,9 +99,6 @@ namespace EDT_TSE_2.Class
             int nbCol = grid.ColumnDefinitions.Count;
             int nbRow = grid.RowDefinitions.Count;
 
-
-
-
             for (int i = 0; i < nbCol; i = i + 2)
             {
                 TextBlock txt_heure = new TextBlock() { Text = (7 + i / 2).ToString() + " h" };
@@ -114,6 +108,7 @@ namespace EDT_TSE_2.Class
                 Grid.SetColumn(border, i);
                 txt_heure.HorizontalAlignment = HorizontalAlignment.Center;
                 txt_heure.VerticalAlignment = VerticalAlignment.Center;
+                txt_heure.FontWeight = FontWeights.Bold;
 
 
 
@@ -130,8 +125,6 @@ namespace EDT_TSE_2.Class
             for (int i = 1; i < nbRow; i++)
             {
 
-
-
                 TextBlock txt_jour = new TextBlock() { Text = lst_jours_semaine[i] };
                 Grid.SetColumnSpan(txt_jour, 2);
                 Grid.SetRow(txt_jour, i);
@@ -140,6 +133,7 @@ namespace EDT_TSE_2.Class
                 txt_jour.HorizontalAlignment = HorizontalAlignment.Stretch;
                 txt_jour.VerticalAlignment = VerticalAlignment.Stretch;
                 txt_jour.Background = Brushes.Gray;
+                txt_jour.FontWeight = FontWeights.Bold ;
 
                 //On veut que le text créer prenne utilise tout l'espace de son parent
                 grid.Children.Add(txt_jour);
@@ -150,37 +144,20 @@ namespace EDT_TSE_2.Class
                 Clear_Child();
                 foreach (var item in Dict_Semaine_Cours[week_number])
                 {
-                    /*
-                    List<int> nbr_cours_stacker_par_jour = new List<int>(); // Param int = 0 --> Lundi etc
-                    Dictionary<int, List<Cours>>  dict_coursstacker_par_jour= new Dictionary<int, List<Cours>>(); // Param int : DayOfWeek, 
-                    
-                    for(int i = 0; i<5; i++)
-                    {
-                        dict_coursstacker_par_jour.Add(i, new List<Cours>());
-                    }
-                    */
-
+                  
                     foreach (var cours in item.Value)
                     {
 
                         grid.Children.Add(Creation_cours(cours));
                         ReferenceDay = cours._jour;
 
-
                     }
                 }
-
 
             }
 
         }
-        /*
-        public void avoid_stacking(TextBlock cours_txtblock, Grid grid)
-        {
-            Grid.GetRow(grid);
-        }
-        */
-
+        
         public bool Cours_overlap(Cours cours_courant, Cours cours_statique)
         {
             DateTime start1 = cours_courant._jour;
@@ -192,20 +169,7 @@ namespace EDT_TSE_2.Class
             return start1 < end2 && start2 < end1; // retourne vrai si overlap
 
         }
-        /*
-        public void Check_Stacking(Dictionary<int, List<Cours>> dict, int dayofweek, Cours cours, List<int> nbr_cours_stacker_par_jour)
-        {
-            foreach(var cours_courant in dict[dayofweek])
-            {
-                if(Cours_overlap(cours_courant, cours))
-                {
-                    dict[dayofweek].
-                }
-
-            }
-        }
-        */
-
+       
         public int duree_to_columnspan(TimeSpan duree)
         {
             int span = Math.Abs(duree.Hours) * 2;
@@ -219,7 +183,7 @@ namespace EDT_TSE_2.Class
 
         public int jour_to_row(DateTime jour)
         {
-            int num_jour = (int)jour.DayOfWeek; // Dimanche = 0, Lundi = 1 etc...
+            int num_jour = (int)jour.DayOfWeek; 
             return num_jour;
         }
 
@@ -229,7 +193,7 @@ namespace EDT_TSE_2.Class
             int ind_col = (cours._jour.Hour - 7) * 2 + 2;
             if ((cours._jour.Minute % 60) != 0)
             {
-                if ((cours._jour.Add(cours._duree).Minute % 60) != 0) // Le cours commence avec 30min de décalage
+                if ((cours._jour.Add(cours._duree).Minute % 60) != 0) 
                 {
                     ind_col = ind_col + 1;
                 }
@@ -268,7 +232,7 @@ namespace EDT_TSE_2.Class
             {
                 return Brushes.LightGreen;
             }
-            else if (cours._type.Equals("Eval"))
+            else if (cours._type.Equals("Eval") || cours._type.Equals("Contr")) 
             {
                 return Brushes.IndianRed;
             }
@@ -292,12 +256,12 @@ namespace EDT_TSE_2.Class
             txt.ClipToBounds = true;
 
             txt.Foreground = Brushes.Navy;
-            //txt.Background = Color_Type(cours);
+      
 
             border.Background = Color_Type(cours);
             border.Child = txt;
             border.BorderThickness = new Thickness(3);
-            border.CornerRadius = new CornerRadius(10);
+            border.CornerRadius = new CornerRadius(6);
 
 
 
@@ -325,37 +289,6 @@ namespace EDT_TSE_2.Class
         }
 
 
-
-        /*
-        public StackPanel Creation_cours(Cours cours)
-        {
-            TextBlock txt = new TextBlock() { Text = cours._description };
-            StackPanel stackPanel = new StackPanel();
-
-            txt.TextAlignment = TextAlignment.Center;
-            txt.TextWrapping = TextWrapping.Wrap;
-            txt.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
-            txt.VerticalAlignment = System.Windows.VerticalAlignment.Center;
-
-            txt.Foreground = Brushes.Navy;
-
-            
-            Console.WriteLine(cours._jour);
-            Grid.SetColumnSpan(stackPanel, duree_to_columnspan(cours._duree));
-            Grid.SetRow(stackPanel, jour_to_row(cours._jour));
-            Grid.SetColumn(stackPanel, jour_to_column(cours._jour));
-            Grid.SetIsSharedSizeScope(stackPanel, true);
-            
-         
-            stackPanel.Background = Brushes.Red;
-
-            stackPanel.Children.Add(txt);
-
-
-            return stackPanel;
-
-        }
-        */
         public string Return_Match_Using_Pattern(string text, string pattern)
         {
             string _pattern = @pattern;
@@ -364,9 +297,7 @@ namespace EDT_TSE_2.Class
         }
         public string Text_to_string(string fichier)
         {
-            //string _path = @path;
-            //string txt = File.ReadAllText(path);
-            //string txt_sansretourligne = Regex.Replace(txt, @"(^\p{Zs}*\r\n){2,}", "", RegexOptions.Multiline);//@"(^\p{Zs}*\r\n){2,}", "\r\n"
+            
             string txt_sansretourligne = fichier.Replace("\n"," ");
             Console.WriteLine(txt_sansretourligne);
 
@@ -385,7 +316,7 @@ namespace EDT_TSE_2.Class
 
             Date_Manager date_Manager = new Date_Manager();
             int week_number;
-            string pattern = @"(?<=BEGIN:VEVENT)(.*?)(?=END:VEVENT)"; //(?<=BEGIN:VEVENT)(.*?)(?=END:VEVENT)
+            string pattern = @"(?<=BEGIN:VEVENT)(.*?)(?=END:VEVENT)"; 
             string pattern_estTSE = @"telecom-st-etienne\.fr";
             Regex regex = new Regex(pattern_estTSE);
             bool estTSE = regex.IsMatch(ICS_Text);
@@ -444,72 +375,9 @@ namespace EDT_TSE_2.Class
 
                 }
 
-
-
             }
-
-
 
         }
-
-        /*
-        public class EvenlyDistributedGrid : Grid
-        {
-            public static void AddChildren(this UIElementCollection children, UIElement child, int row, int column)
-            {
-                Grid parentGrid = GetParentGrid(children);
-
-                if (parentGrid == null)
-                {
-                    // If the parent of the children collection is not a Grid, exit the method
-                    return;
-                }
-
-                if (IsCellAvailable(parentGrid, row, column))
-                {
-                    // If the cell is available, add the child to the specified row and column
-                    Grid.SetRow(child, row);
-                    Grid.SetColumn(child, column);
-                    parentGrid.Children.Add(child);
-                }
-                else
-                {
-                    // If the cell is not available, create a new row and add the child to it
-                    RowDefinition newRowDefinition = new RowDefinition();
-                    parentGrid.RowDefinitions.Add(newRowDefinition);
-                    Grid.SetRow(child, parentGrid.RowDefinitions.Count - 1);
-                    Grid.SetColumn(child, column);
-                    parentGrid.Children.Add(child);
-                }
-            }
-
-            private static Grid GetParentGrid(UIElementCollection children)
-            {
-                DependencyObject parent = children.Owner;
-                while (parent != null && !(parent is Grid))
-                {
-                    parent = VisualTreeHelper.GetParent(parent);
-                }
-                return parent as Grid;
-            }
-
-            private static bool IsCellAvailable(Grid grid, int row, int column)
-            {
-                foreach (UIElement child in grid.Children)
-                {
-                    if (Grid.GetRow(child) == row && Grid.GetColumn(child) == column)
-                    {
-                        // Cell is not available, it's already occupied
-                        return false;
-                    }
-                }
-                // Cell is available
-                return true;
-            }
-        }
-        */
-
-
         public class Cours
         {
             public string _description;
@@ -536,11 +404,11 @@ namespace EDT_TSE_2.Class
             public string Type(string description)
             {
                 string type_cours = "Autre";
-                List<string> different_type = new List<string> { "TD", "CM", "TP", "Eval" };
+                List<string> different_type = new List<string> { "TD", "CM", "TP", "Eval", "Contr" };
 
                 foreach (string type in different_type)
                 {
-                    string pattern = @"\b" + Regex.Escape(type) + @"\b";
+                    string pattern = @"" + Regex.Escape(type) + @"";
 
                     Regex regex = new Regex(pattern);
 

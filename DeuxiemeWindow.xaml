@@ -10,21 +10,26 @@
             <!-- Pour la colonne des notes -->
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height ="2*"/>
+            <RowDefinition Height ="3*"/>
             <RowDefinition Height ="3*"/>
         </Grid.RowDefinitions>
 
         <!-- Colonne des cours -->
-        <StackPanel Grid.Column="1" Grid.Row="1"  x:Name="CourseStackPanel">
-            <TextBlock Text="Liste des cours" FontWeight="Bold" FontSize="16" Margin="5"/>
+        <Border  BorderThickness="1" CornerRadius="8" Grid.Column="1" Grid.Row="1" Margin="2" BorderBrush="Black">
+        <StackPanel x:Name="CourseStackPanel" ClipToBounds="True"  >
+            
+            <TextBlock Text="Liste des cours" FontWeight="Bold" FontSize="16"  Background="LightGray"/>
+            
             <!-- Insérez votre contenu des cours ici -->
         </StackPanel>
+        </Border>
 
         <!-- Colonne des notes -->
-        <ListView Grid.Column="0"  Grid.Row="1"  x:Name="listView">
+        <Border Grid.Column="0"  Grid.Row="1" BorderBrush="Black" CornerRadius="8" Margin="3" BorderThickness="1" >
+        <ListView   x:Name="listView" >
             <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="Module" DisplayMemberBinding="{Binding Module}" Width="150"/>
+                <GridView >
+                    <GridViewColumn Header="Module" DisplayMemberBinding="{Binding Module}" Width="150" />
                     <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="150"/>
                     <GridViewColumn Header="Min" DisplayMemberBinding="{Binding Min}" Width="150"/>
                     <GridViewColumn Header="Max" DisplayMemberBinding="{Binding Max}" Width="150"/>
@@ -34,20 +39,22 @@
                 </GridView>
             </ListView.View>
         </ListView>
+        </Border>
         <!-- Colonne Agenda -->
-        <Grid Name="EDT_Complet" Grid.ColumnSpan="2" >
+        <Border Grid.ColumnSpan="2" CornerRadius="10" Margin="5" >
+        <Grid Name="EDT_Complet"  >
 
             <Grid.ColumnDefinitions>
 
                 <ColumnDefinition Width="3*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
+                <RowDefinition Height="2*" />
                 <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="4*" />
+                <RowDefinition Height="6*" />
             </Grid.RowDefinitions>
             <StackPanel   HorizontalAlignment="Center" VerticalAlignment="Center"  >
-                <ComboBox  Height="46" Width="71" IsEditable="True" IsReadOnly="True" Name="ListeSemaines" SelectionChanged="ListeSemaines_SelectionChanged" >
+                    <ComboBox  Height="Auto" Width="60" IsEditable="True" IsReadOnly="True" Name="ListeSemaines" SelectionChanged="ListeSemaines_SelectionChanged" >
                     <ComboBox.ItemTemplate   >
                         <DataTemplate >
                             <StackPanel Orientation="Horizontal">
@@ -57,65 +64,68 @@
                     </ComboBox.ItemTemplate>
                 </ComboBox>
             </StackPanel>
-            <ListView   Grid.Row="1"  HorizontalAlignment="Left" VerticalAlignment="Center"  >
-                <TextBlock TextWrapping="Wrap" Text="Emploi du temps "/>
-                <TextBlock TextWrapping="Wrap" Name="Semaine_Correspondance"/>
+            <ListView   Grid.Row="0"  HorizontalAlignment="Left" VerticalAlignment="Center" Background="LightGray" >
+                <TextBlock TextWrapping="Wrap" Text="Emploi du temps " FontWeight="Bold"/>
+                    <TextBlock TextWrapping="Wrap" Name="Semaine_Correspondance" FontWeight="Bold"/>
             </ListView>
-            <Grid Grid.Row="2" ShowGridLines="true" Name="grid2" >
+                <Border Grid.Row="2" BorderBrush="Black" BorderThickness="1" CornerRadius="8">
+                    <Grid  ShowGridLines="true" Name="grid2" >
 
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
 
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
 
 
-                <TextBlock Grid.Row="1" Grid.Column="0" Text="Lundi" Grid.ColumnSpan="2"  />
-                <TextBlock Grid.Row="2" Grid.Column="0" Text="Mardi" Grid.ColumnSpan="2" />
-                <TextBlock Grid.Row="3" Grid.Column="0" Text="Mercredi" Grid.ColumnSpan="2"  />
-                <TextBlock Grid.Row="4" Grid.Column="0" Text="Jeudi" Grid.ColumnSpan="2"/>
-                <TextBlock Grid.Row="5" Grid.Column="0" Text="Vendredi" Grid.ColumnSpan="2"  />
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="Lundi" Grid.ColumnSpan="2" FontWeight="Bold" />
+                        <TextBlock Grid.Row="2" Grid.Column="0" Text="Mardi" Grid.ColumnSpan="2" FontWeight="Bold"/>
+                        <TextBlock Grid.Row="3" Grid.Column="0" Text="Mercredi" Grid.ColumnSpan="2"  FontWeight="Bold"/>
+                        <TextBlock Grid.Row="4" Grid.Column="0" Text="Jeudi" Grid.ColumnSpan="2" FontWeight="Bold"/>
+                        <TextBlock Grid.Row="5" Grid.Column="0" Text="Vendredi" Grid.ColumnSpan="2" FontWeight="Bold" />
 
+
+                    </Grid>
+                </Border>
 
             </Grid>
-
-        </Grid>
-
+        </Border>
     </Grid>
+    
 </Window>
 
