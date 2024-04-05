@@ -285,7 +285,7 @@ namespace EDT_TSE_2.Class
 
         public string Set_Semaine(int week_selected)
         {
-            return "Date :" + ReferenceDay.Date.ToString(" ddd/MM/yy");
+            return "Date :" + ReferenceDay.Date.ToString(" MM/yy");
         }
 
 
