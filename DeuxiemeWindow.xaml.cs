@@ -79,7 +79,7 @@ namespace moodle2
             DataContext = this;
             date_manager = new Date_Manager(ListeSemaines);
             edt_manager = new EDT_Manager(grid2, date_manager.current_week_number);
-            Semaine_Correspondance.Text = edt_manager.Set_Semaine(date_manager.current_week_number);
+            Semaine_Correspondance.Text = edt_manager.Set_Semaine(date_manager.current_week_number, date_manager.Current_Day);
 
         }
         public DeuxiemeWindow()
@@ -358,7 +358,7 @@ namespace moodle2
 
             date_manager.Update_Date(week_selected, ListeSemaines);
             edt_manager.peupler_edt(week_selected, grid2);
-            Semaine_Correspondance.Text = edt_manager.Set_Semaine(week_selected);
+            Semaine_Correspondance.Text = edt_manager.Set_Semaine(week_selected, date_manager.Current_Day);
             OnPropertyChanged();
         }
 
